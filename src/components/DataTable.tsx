@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 interface Column {
   key: string;
   header: string;
@@ -11,6 +13,27 @@ interface DataTableProps {
   title?: string;
 }
 
+function TableRow({ row, columns }: { row: any; columns: Column[] }) {
+  const [hovered, setHovered] = useState(false);
+
+  return (
+    <tr
+      className={`border-b border-border/30 transition-colors ${hovered ? "bg-muted/40" : ""}`}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+    >
+      {columns.map((col) => (
+        <td
+          key={col.key}
+          className={`px-4 py-2 text-${col.align || "left"}`}
+        >
+          {col.render ? col.render(row[col.key] ?? "", row) : (row[col.key] ?? "—")}
+        </td>
+      ))}
+    </tr>
+  );
+}
+
 export function DataTable({ columns, data, title }: DataTableProps) {
   return (
     <div className="grid-panel">
@@ -19,8 +42,8 @@ export function DataTable({ columns, data, title }: DataTableProps) {
           <span className="kpi-label">{title}</span>
         </div>
       )}
-      <div className="overflow-x-auto">
-        <table className="w-full font-data text-xs">
+      <div className="overflow-x-auto" style={{ minWidth: 0 }}>
+        <table className="w-full font-data text-xs" style={{ minWidth: 600 }}>
           <thead>
             <tr className="border-b border-border">
               {columns.map((col) => (
@@ -35,16 +58,7 @@ export function DataTable({ columns, data, title }: DataTableProps) {
           </thead>
           <tbody>
             {data.map((row, i) => (
-              <tr key={i} className="border-b border-border/30 hover:bg-muted/30 transition-colors">
-                {columns.map((col) => (
-                  <td
-                    key={col.key}
-                    className={`px-4 py-2 text-${col.align || "left"}`}
-                  >
-                    {col.render ? col.render(row[col.key], row) : row[col.key]}
-                  </td>
-                ))}
-              </tr>
+              <TableRow key={row.id ?? row.po ?? row.ticket ?? row.batch ?? row.shipId ?? row.lot ?? i} row={row} columns={columns} />
             ))}
           </tbody>
         </table>

@@ -9,7 +9,9 @@ import StorePage from "./pages/StorePage";
 import CuttingPage from "./pages/CuttingPage";
 import SewingPage from "./pages/SewingPage";
 import WashPage from "./pages/WashPage";
+import QualityPage from "./pages/QualityPage";
 import FinishingPage from "./pages/FinishingPage";
+import MerchandisingPage from "./pages/MerchandisingPage";
 import ShipmentPage from "./pages/ShipmentPage";
 import NotFound from "./pages/NotFound";
 
@@ -30,7 +32,9 @@ const App = () => (
               <Route path="/cutting" element={<CuttingPage />} />
               <Route path="/sewing" element={<SewingPage />} />
               <Route path="/wash" element={<WashPage />} />
+              <Route path="/quality" element={<QualityPage />} />
               <Route path="/finishing" element={<FinishingPage />} />
+              <Route path="/merchandising" element={<MerchandisingPage />} />
               <Route path="/shipment" element={<ShipmentPage />} />
               <Route path="*" element={<NotFound />} />
             </Routes>

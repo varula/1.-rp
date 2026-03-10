@@ -1,13 +1,15 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Warehouse, Scissors, Cog, Droplets, Package, Truck, LayoutDashboard } from "lucide-react";
+import { Warehouse, Scissors, Cog, Droplets, Package, Truck, LayoutDashboard, ClipboardCheck, Briefcase } from "lucide-react";
 
-const modules = [
+const MODULES = [
   { id: "dashboard", label: "DASHBOARD", path: "/", icon: LayoutDashboard },
   { id: "store", label: "STORE", path: "/store", icon: Warehouse },
   { id: "cutting", label: "CUTTING", path: "/cutting", icon: Scissors },
   { id: "sewing", label: "SEWING", path: "/sewing", icon: Cog },
   { id: "wash", label: "WASH", path: "/wash", icon: Droplets },
+  { id: "quality", label: "QC", path: "/quality", icon: ClipboardCheck },
   { id: "finishing", label: "FINISHING", path: "/finishing", icon: Package },
+  { id: "merchandising", label: "MERCH", path: "/merchandising", icon: Briefcase },
   { id: "shipment", label: "SHIP", path: "/shipment", icon: Truck },
 ];
 
@@ -30,7 +32,7 @@ export function ProductionTimeline() {
 
         {/* Timeline modules */}
         <div className="flex flex-1 items-stretch overflow-x-auto">
-          {modules.map((mod, i) => {
+          {MODULES.map((mod, i) => {
             const isActive = location.pathname === mod.path;
             const Icon = mod.icon;
             return (
@@ -48,7 +50,7 @@ export function ProductionTimeline() {
               >
                 <Icon className="w-4 h-4" />
                 {mod.label}
-                {i < modules.length - 1 && !isActive && (
+                {i < MODULES.length - 1 && !isActive && (
                   <span className="ml-2 text-primary opacity-40">→</span>
                 )}
               </button>
