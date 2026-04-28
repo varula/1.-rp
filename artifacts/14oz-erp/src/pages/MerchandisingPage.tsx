@@ -32,8 +32,8 @@ const COLUMNS = [
       const isHigh = val === "HIGH";
       const isMed = val === "MEDIUM";
       return (
-        <span className={`px-2 py-0.5 text-[10px] font-display uppercase tracking-wider border ${
-          isHigh ? "border-accent text-accent" : isMed ? "border-primary text-primary" : "border-secondary text-secondary"
+        <span className={`chip ${
+          isHigh ? "chip-alert" : isMed ? "chip-primary" : "chip-secondary"
         }`}>{val}</span>
       );
     },
@@ -44,8 +44,8 @@ const COLUMNS = [
     render: (val: string) => {
       const isDelayed = val === "DELAYED" || val === "FABRIC PENDING";
       return (
-        <span className={`px-2 py-0.5 text-[10px] font-display uppercase tracking-wider border ${
-          isDelayed ? "border-accent text-accent" : "border-secondary text-secondary"
+        <span className={`chip ${
+          isDelayed ? "chip-alert" : "chip-secondary"
         }`}>{val}</span>
       );
     },
@@ -63,11 +63,14 @@ const BUYER_REVENUE = [
 
 export default function MerchandisingPage() {
   return (
-    <div className="p-4 space-y-4">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-[1px] bg-border">
+    <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-8 animate-in fade-in duration-500">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold tracking-tight">Merchandising</h1>
+      </div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {KPIS.map((kpi, i) => <KPICard key={i} {...kpi} />)}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-[1px] bg-border">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-8">
           <DataTable columns={COLUMNS} data={PO_TRACKER} title="PO Tracker — Merchandising" />
         </div>

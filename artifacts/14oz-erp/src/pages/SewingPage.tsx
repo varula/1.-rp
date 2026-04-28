@@ -29,7 +29,7 @@ const columns = [
     align: "right" as const,
     render: (val: string) => {
       const num = parseFloat(val);
-      return <span className={num < 85 ? "status-alert" : "status-nominal"}>{val}</span>;
+      return <span className={num < 85 ? "text-accent font-semibold" : "text-muted-foreground"}>{val}</span>;
     },
   },
   {
@@ -38,7 +38,7 @@ const columns = [
     align: "right" as const,
     render: (val: string) => {
       const num = parseFloat(val);
-      return <span className={num > 5 ? "status-alert" : "status-nominal"}>{val}</span>;
+      return <span className={num > 5 ? "text-accent font-semibold" : "text-muted-foreground"}>{val}</span>;
     },
   },
   { key: "ot", header: "OT" },
@@ -55,11 +55,14 @@ const efficiencyData = [
 
 export default function SewingPage() {
   return (
-    <div className="p-4 space-y-4">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-[1px] bg-border">
+    <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-8 animate-in fade-in duration-500">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold tracking-tight">Sewing</h1>
+      </div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {kpis.map((kpi, i) => <KPICard key={i} {...kpi} />)}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-[1px] bg-border">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-8">
           <DataTable columns={columns} data={lineData} title="Sewing Line Performance" />
         </div>

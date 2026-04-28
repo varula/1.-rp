@@ -30,8 +30,8 @@ const columns = [
     render: (val: string) => {
       const isAlert = val === "QC HOLD" || val === "INCOMING";
       return (
-        <span className={`px-2 py-0.5 text-[10px] font-display uppercase tracking-wider border ${
-          isAlert ? "border-accent text-accent" : "border-secondary text-secondary"
+        <span className={`chip ${
+          isAlert ? "chip-alert" : "chip-secondary"
         }`}>{val}</span>
       );
     },
@@ -48,11 +48,14 @@ const utilizationData = [
 
 export default function StorePage() {
   return (
-    <div className="p-4 space-y-4">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-[1px] bg-border">
+    <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-8 animate-in fade-in duration-500">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold tracking-tight">Store</h1>
+      </div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {kpis.map((kpi, i) => <KPICard key={i} {...kpi} />)}
       </div>
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-[1px] bg-border">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         <div className="lg:col-span-8">
           <DataTable columns={columns} data={inventory} title="Fabric Inventory" />
         </div>

@@ -27,8 +27,8 @@ const columns = [
     render: (val: string) => {
       const isQA = val === "FINAL QA";
       return (
-        <span className={`px-2 py-0.5 text-[10px] font-display uppercase tracking-wider border ${
-          isQA ? "border-accent text-accent" : "border-secondary text-secondary"
+        <span className={`chip ${
+          isQA ? "chip-alert" : "chip-secondary"
         }`}>{val}</span>
       );
     },
@@ -39,7 +39,7 @@ const columns = [
     align: "right" as const,
     render: (val: string) => {
       const num = parseFloat(val);
-      return <span className={num < 95 ? "status-alert" : "status-nominal"}>{val}</span>;
+      return <span className={num < 95 ? "text-accent font-semibold" : "text-muted-foreground"}>{val}</span>;
     },
   },
   { key: "packed", header: "Packed", align: "right" as const },
@@ -47,8 +47,11 @@ const columns = [
 
 export default function FinishingPage() {
   return (
-    <div className="p-4 space-y-4">
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-[1px] bg-border">
+    <div className="max-w-7xl mx-auto p-6 md:p-8 space-y-8 animate-in fade-in duration-500">
+      <div className="flex items-center justify-between">
+        <h1 className="text-2xl font-semibold tracking-tight">Finishing</h1>
+      </div>
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {kpis.map((kpi, i) => <KPICard key={i} {...kpi} />)}
       </div>
       <DataTable columns={columns} data={finishingData} title="Finishing Pipeline" />

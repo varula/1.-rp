@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;1,14..32,400&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -6,53 +6,48 @@
 
 @layer base {
   :root {
-    --background: 220 60% 7%;
-    --foreground: 210 20% 98%;
+    --background: 220 20% 97%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 211 100% 50%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 210 40% 94%;
+    --secondary-foreground: 222 47% 20%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 33 95% 48%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 214 32% 90%;
+    --input: 214 32% 90%;
+    --ring: 211 100% 50%;
+    --radius: 14px;
+  }
 
-    --card: 220 55% 10%;
-    --card-foreground: 210 20% 98%;
-
-    --popover: 220 55% 10%;
-    --popover-foreground: 210 20% 98%;
-
-    --primary: 28 75% 41%;
-    --primary-foreground: 210 20% 98%;
-
-    --secondary: 216 38% 47%;
-    --secondary-foreground: 210 20% 98%;
-
-    --muted: 220 50% 13%;
-    --muted-foreground: 216 20% 55%;
-
-    --accent: 355 78% 56%;
-    --accent-foreground: 210 20% 98%;
-
-    --destructive: 355 78% 56%;
-    --destructive-foreground: 210 20% 98%;
-
-    --border: 28 75% 41%;
-    --input: 220 50% 16%;
-    --ring: 28 75% 41%;
-
-    --radius: 0px;
-
-    --sidebar-background: 220 55% 8%;
-    --sidebar-foreground: 210 20% 98%;
-    --sidebar-primary: 28 75% 41%;
-    --sidebar-primary-foreground: 210 20% 98%;
-    --sidebar-accent: 220 50% 13%;
-    --sidebar-accent-foreground: 210 20% 98%;
-    --sidebar-border: 28 75% 41%;
-    --sidebar-ring: 28 75% 41%;
-
-    /* Custom tokens */
-    --indigo-dye: 220 60% 7%;
-    --indigo-deep: 220 55% 10%;
-    --copper-rivet: 28 75% 41%;
-    --selvedge-red: 355 78% 56%;
-    --bleached-cotton: 210 20% 98%;
-    --indigo-fade: 216 38% 47%;
-    --indigo-wash: 220 50% 16%;
+  .dark {
+    --background: 222 47% 7%;
+    --foreground: 210 40% 96%;
+    --card: 223 47% 10%;
+    --card-foreground: 210 40% 96%;
+    --popover: 223 47% 10%;
+    --popover-foreground: 210 40% 96%;
+    --primary: 211 100% 58%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 217 33% 16%;
+    --secondary-foreground: 210 40% 90%;
+    --muted: 217 33% 14%;
+    --muted-foreground: 215 20% 58%;
+    --accent: 33 95% 52%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 63% 50%;
+    --destructive-foreground: 0 0% 100%;
+    --border: 217 33% 18%;
+    --input: 217 33% 18%;
+    --ring: 211 100% 58%;
   }
 }
 
@@ -60,67 +55,167 @@
   * {
     @apply border-border;
   }
-
   body {
-    @apply bg-background text-foreground font-mono;
-    font-family: 'JetBrains Mono', monospace;
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Inter Tight', sans-serif;
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 @layer components {
-  .font-display {
-    font-family: 'Inter Tight', sans-serif;
-  }
-
-  .font-data {
-    font-family: 'JetBrains Mono', monospace;
-    font-variant-numeric: tabular-nums;
-  }
-
   .grid-panel {
-    @apply border border-border bg-card;
+    @apply bg-card rounded-[14px] border border-border;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+    transition: box-shadow 0.2s ease;
+  }
+  .grid-panel:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.07), 0 2px 6px rgba(0,0,0,0.04);
+  }
+
+  .dark .grid-panel {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.2);
+  }
+  .dark .grid-panel:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.4), 0 2px 6px rgba(0,0,0,0.25);
   }
 
   .kpi-value {
-    @apply text-2xl font-bold font-data tracking-tight;
+    @apply text-3xl font-bold tracking-tight text-foreground;
+    font-feature-settings: "tnum";
   }
 
   .kpi-label {
-    @apply text-xs uppercase tracking-widest text-muted-foreground font-display font-semibold;
+    @apply text-[11px] font-semibold uppercase tracking-widest text-muted-foreground;
+    letter-spacing: 0.08em;
   }
 
   .status-nominal {
-    color: hsl(var(--indigo-fade));
+    @apply text-primary;
   }
 
   .status-alert {
-    color: hsl(var(--selvedge-red));
+    @apply text-accent;
   }
 
-  .copper-divider {
-    @apply border-t border-border;
+  .chip {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-semibold tracking-wide;
+  }
+  .chip-primary {
+    @apply bg-primary/10 text-primary;
+  }
+  .chip-secondary {
+    @apply bg-secondary text-secondary-foreground;
+  }
+  .chip-alert {
+    @apply bg-accent/15 text-accent;
+  }
+  .chip-success {
+    @apply bg-green-100 text-green-700;
+  }
+  .dark .chip-success {
+    @apply bg-green-900/30 text-green-400;
   }
 
-  /* Scissor cut animation */
-  @keyframes scissor-cut {
-    0% { clip-path: inset(0 0 100% 0); }
-    100% { clip-path: inset(0 0 0 0); }
+  /* Glass nav */
+  .glass-nav {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .dark .glass-nav {
+    background: rgba(13, 17, 32, 0.80);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
   }
 
-  @keyframes cascade-down {
-    0% { opacity: 0; transform: translateY(-20px); }
-    100% { opacity: 1; transform: translateY(0); }
+  /* Active pill in nav */
+  .nav-pill-active {
+    background: white;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.10), 0 0 0 1px rgba(0,0,0,0.04);
+  }
+  .dark .nav-pill-active {
+    background: hsl(var(--secondary));
+    box-shadow: 0 1px 4px rgba(0,0,0,0.4), 0 0 0 1px rgba(255,255,255,0.06);
   }
 
-  .animate-cut {
-    animation: scissor-cut 0.2s ease-out forwards;
+  /* Bar chart fill animation */
+  @keyframes barFill {
+    from { width: 0%; }
+    to   { width: var(--bar-w); }
+  }
+  .bar-animated {
+    animation: barFill 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    width: 0%;
   }
 
-  .animate-cascade {
-    animation: cascade-down 0.3s ease-out forwards;
+  /* Card entrance */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .card-enter {
+    animation: fadeInUp 0.4s ease both;
+  }
+
+  /* Row entrance */
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  .row-enter {
+    animation: fadeIn 0.3s ease both;
+  }
+}
+
+/* ── Utilities ─────────────────────────────────────────── */
+@layer utilities {
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+  .scrollbar-none { -ms-overflow-style: none; scrollbar-width: none; }
+  .tabular-nums { font-variant-numeric: tabular-nums; }
+}
+
+/* ── Print / PDF export ────────────────────────────────── */
+@media print {
+  * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+  .no-print { display: none !important; }
+
+  nav, header { display: none !important; }
+
+  body {
+    background: white !important;
+    color: #111 !important;
+    font-size: 12px;
+  }
+
+  main {
+    padding: 0 !important;
+  }
+
+  .max-w-7xl {
+    max-width: 100% !important;
+    padding: 1rem !important;
+  }
+
+  .grid-panel {
+    box-shadow: none !important;
+    border: 1px solid #e5e7eb !important;
+    break-inside: avoid;
+  }
+
+  .grid-panel:hover {
+    box-shadow: none !important;
+  }
+
+  h1 { font-size: 18px !important; }
+  .kpi-value { font-size: 22px !important; }
+
+  table { width: 100% !important; font-size: 10px !important; }
+
+  @page {
+    margin: 1.5cm;
+    size: A4 landscape;
   }
 }

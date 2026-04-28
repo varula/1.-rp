@@ -1,5 +1,3 @@
-import { useState } from "react";
-
 interface Column {
   key: string;
   header: string;
@@ -13,43 +11,24 @@ interface DataTableProps {
   title?: string;
 }
 
-function TableRow({ row, columns }: { row: any; columns: Column[] }) {
-  const [hovered, setHovered] = useState(false);
-
-  return (
-    <tr
-      className={`border-b border-border/30 transition-colors ${hovered ? "bg-muted/40" : ""}`}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-    >
-      {columns.map((col) => (
-        <td
-          key={col.key}
-          className={`px-4 py-2 ${col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left"}`}
-        >
-          {col.render ? col.render(row[col.key] ?? "", row) : (row[col.key] ?? "—")}
-        </td>
-      ))}
-    </tr>
-  );
-}
-
 export function DataTable({ columns, data, title }: DataTableProps) {
   return (
-    <div className="grid-panel">
+    <div className="grid-panel overflow-hidden">
       {title && (
-        <div className="px-4 py-2 border-b border-border">
+        <div className="px-5 py-4 border-b border-border">
           <span className="kpi-label">{title}</span>
         </div>
       )}
-      <div className="overflow-x-auto" style={{ minWidth: 0 }}>
-        <table className="w-full font-data text-xs" style={{ minWidth: 600 }}>
+      <div className="overflow-x-auto">
+        <table className="w-full text-left border-collapse min-w-[580px]">
           <thead>
-            <tr className="border-b border-border">
+            <tr className="border-b border-border bg-muted/40">
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className={`px-4 py-2 font-display font-semibold text-[10px] uppercase tracking-widest text-muted-foreground ${col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left"}`}
+                  className={`px-5 py-3 text-[11px] font-semibold text-muted-foreground uppercase tracking-wider whitespace-nowrap ${
+                    col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left"
+                  }`}
                 >
                   {col.header}
                 </th>
@@ -58,7 +37,24 @@ export function DataTable({ columns, data, title }: DataTableProps) {
           </thead>
           <tbody>
             {data.map((row, i) => (
-              <TableRow key={row.id ?? row.po ?? row.ticket ?? row.batch ?? row.shipId ?? row.lot ?? i} row={row} columns={columns} />
+              <tr
+                key={`${row.id ?? row.po ?? row.ticket ?? row.batch ?? row.shipId ?? row.lot ?? "row"}-${i}`}
+                className="row-enter border-b border-border/50 hover:bg-muted/30 transition-colors"
+                style={{ animationDelay: `${i * 40}ms` }}
+              >
+                {columns.map((col) => (
+                  <td
+                    key={col.key}
+                    className={`px-5 py-3.5 text-sm ${
+                      col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left"
+                    }`}
+                  >
+                    {col.render ? col.render(row[col.key] ?? "", row) : (
+                      <span className="text-foreground/90 font-medium tabular-nums">{row[col.key] ?? "—"}</span>
+                    )}
+                  </td>
+                ))}
+              </tr>
             ))}
           </tbody>
         </table>
