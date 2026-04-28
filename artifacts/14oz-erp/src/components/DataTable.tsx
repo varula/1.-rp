@@ -25,7 +25,7 @@ function TableRow({ row, columns }: { row: any; columns: Column[] }) {
       {columns.map((col) => (
         <td
           key={col.key}
-          className={`px-4 py-2 text-${col.align || "left"}`}
+          className={`px-4 py-2 ${col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left"}`}
         >
           {col.render ? col.render(row[col.key] ?? "", row) : (row[col.key] ?? "—")}
         </td>
@@ -49,7 +49,7 @@ export function DataTable({ columns, data, title }: DataTableProps) {
               {columns.map((col) => (
                 <th
                   key={col.key}
-                  className={`px-4 py-2 font-display font-semibold text-[10px] uppercase tracking-widest text-muted-foreground text-${col.align || "left"}`}
+                  className={`px-4 py-2 font-display font-semibold text-[10px] uppercase tracking-widest text-muted-foreground ${col.align === "right" ? "text-right" : col.align === "center" ? "text-center" : "text-left"}`}
                 >
                   {col.header}
                 </th>
