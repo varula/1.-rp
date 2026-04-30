@@ -44,15 +44,25 @@ export function ProductionTimeline() {
     <nav className="glass-nav sticky top-0 z-50 w-full no-print">
       {/* ── Row 1: Factory identity + controls ── */}
       <div className="flex items-center justify-between px-5 py-2.5 border-b border-border/60">
-        {/* Left: SewMetrics label + factory name */}
-        <div className="flex items-center gap-3 min-w-0">
-          <span className="text-[11px] font-semibold text-primary tracking-widest uppercase shrink-0">
-            SewMetrics
-          </span>
-          <span className="w-px h-4 bg-border shrink-0" />
+        {/* Left: SewMetrics brand + factory name */}
+        <div className="flex items-center gap-4 min-w-0">
+          {/* Brand block */}
+          <div className="flex flex-col shrink-0">
+            <span className="text-[19px] font-bold tracking-tight text-primary leading-tight">
+              SewMetrics
+            </span>
+            <span className="text-[10px] font-medium text-muted-foreground leading-tight tracking-wide">
+              A Connected Ecosystem for Apparel Manufacturing
+            </span>
+          </div>
+
+          {/* Divider */}
+          <span className="w-px h-8 bg-border shrink-0" />
+
+          {/* Factory name */}
           <div className="flex items-center gap-1.5 min-w-0">
             <Factory className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-            <span className="text-[15px] font-semibold text-foreground tracking-tight truncate">
+            <span className="text-[14px] font-semibold text-foreground tracking-tight truncate">
               {FACTORY_NAME}
             </span>
           </div>
