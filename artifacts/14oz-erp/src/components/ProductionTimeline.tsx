@@ -4,7 +4,7 @@ import { useTheme } from "next-themes";
 import {
   Warehouse, Scissors, Cog, Droplets, Package, Truck,
   LayoutDashboard, ClipboardCheck, Briefcase,
-  Sun, Moon, Printer, Maximize2, Factory,
+  Sun, Moon, Printer, Maximize2,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -60,9 +60,11 @@ export function ProductionTimeline() {
           <span className="w-px h-8 bg-border shrink-0" />
 
           {/* Factory name */}
-          <div className="flex items-center gap-1.5 min-w-0">
-            <Factory className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
-            <span className="text-[14px] font-semibold text-foreground tracking-tight truncate">
+          <div className="flex flex-col min-w-0">
+            <span className="text-[11px] font-semibold uppercase tracking-widest text-muted-foreground leading-tight">
+              Factory
+            </span>
+            <span className="text-[17px] font-bold text-foreground tracking-tight leading-tight truncate">
               {FACTORY_NAME}
             </span>
           </div>
