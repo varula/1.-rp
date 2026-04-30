@@ -4,9 +4,11 @@ import { useTheme } from "next-themes";
 import {
   Warehouse, Scissors, Cog, Droplets, Package, Truck,
   LayoutDashboard, ClipboardCheck, Briefcase,
-  Sun, Moon, Printer, Maximize2,
+  Sun, Moon, Printer, Maximize2, Factory,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+
+const FACTORY_NAME = "Armana Fashions / Apparels Ltd";
 
 const MODULES = [
   { id: "dashboard", label: "Dashboard", path: "/",             icon: LayoutDashboard },
@@ -40,54 +42,28 @@ export function ProductionTimeline() {
 
   return (
     <nav className="glass-nav sticky top-0 z-50 w-full no-print">
-      <div className="flex items-center px-5 h-14 gap-2">
-        {/* Brand */}
-        <div className="flex flex-col mr-6 shrink-0">
-          <span className="font-bold text-[17px] tracking-tight text-foreground leading-tight">SewMetrics</span>
-          <span className="text-[9px] text-muted-foreground font-medium tracking-wide leading-tight whitespace-nowrap hidden md:block">A Connected Ecosystem for Apparel Manufacturing</span>
+      {/* ── Row 1: Factory identity + controls ── */}
+      <div className="flex items-center justify-between px-5 py-2.5 border-b border-border/60">
+        {/* Left: SewMetrics label + factory name */}
+        <div className="flex items-center gap-3 min-w-0">
+          <span className="text-[11px] font-semibold text-primary tracking-widest uppercase shrink-0">
+            SewMetrics
+          </span>
+          <span className="w-px h-4 bg-border shrink-0" />
+          <div className="flex items-center gap-1.5 min-w-0">
+            <Factory className="w-3.5 h-3.5 text-muted-foreground shrink-0" />
+            <span className="text-[15px] font-semibold text-foreground tracking-tight truncate">
+              {FACTORY_NAME}
+            </span>
+          </div>
         </div>
 
-        {/* Nav pills */}
-        <div className="flex flex-1 items-center gap-0.5 overflow-x-auto scrollbar-none">
-          {MODULES.map((mod) => {
-            const isActive = location.pathname === mod.path;
-            const Icon = mod.icon;
-            return (
-              <button
-                key={mod.id}
-                onClick={() => navigate(mod.path)}
-                className={`
-                  relative flex items-center gap-1.5 px-3 py-1.5 text-sm font-medium
-                  rounded-full whitespace-nowrap transition-colors duration-150
-                  ${isActive
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5"
-                  }
-                `}
-              >
-                {isActive && (
-                  <motion.div
-                    layoutId="nav-pill"
-                    className="nav-pill-active absolute inset-0 rounded-full"
-                    transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
-                  />
-                )}
-                <span className="relative z-10 flex items-center gap-1.5">
-                  <Icon className="w-3.5 h-3.5" />
-                  {mod.label}
-                </span>
-              </button>
-            );
-          })}
-        </div>
-
-        {/* Right controls */}
-        <div className="flex items-center gap-1 ml-2 shrink-0">
-          {/* Dark/light toggle */}
+        {/* Right: controls + clock */}
+        <div className="flex items-center gap-1 ml-4 shrink-0">
           {mounted && (
             <button
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+              className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
               title={theme === "dark" ? "Switch to light mode" : "Switch to dark mode"}
             >
               <AnimatePresence mode="wait" initial={false}>
@@ -99,35 +75,63 @@ export function ProductionTimeline() {
                   transition={{ duration: 0.2 }}
                   className="block"
                 >
-                  {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                  {theme === "dark" ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
                 </motion.span>
               </AnimatePresence>
             </button>
           )}
-
-          {/* PDF export */}
           <button
             onClick={handlePrint}
-            className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+            className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
             title="Export to PDF"
           >
-            <Printer className="w-4 h-4" />
+            <Printer className="w-3.5 h-3.5" />
           </button>
-
-          {/* Presentation mode */}
           <button
             onClick={handlePresentation}
-            className="p-2 rounded-full text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+            className="p-1.5 rounded-full text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
             title="Presentation mode"
           >
-            <Maximize2 className="w-4 h-4" />
+            <Maximize2 className="w-3.5 h-3.5" />
           </button>
-
-          {/* Live clock */}
           <div className="ml-2 pl-3 border-l border-border">
             <LiveClock />
           </div>
         </div>
+      </div>
+
+      {/* ── Row 2: Section navigation pills ── */}
+      <div className="flex items-center px-4 py-1 gap-0.5 overflow-x-auto scrollbar-none">
+        {MODULES.map((mod) => {
+          const isActive = location.pathname === mod.path;
+          const Icon = mod.icon;
+          return (
+            <button
+              key={mod.id}
+              onClick={() => navigate(mod.path)}
+              className={`
+                relative flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium
+                rounded-full whitespace-nowrap transition-colors duration-150
+                ${isActive
+                  ? "text-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-black/5 dark:hover:bg-white/5"
+                }
+              `}
+            >
+              {isActive && (
+                <motion.div
+                  layoutId="nav-pill"
+                  className="nav-pill-active absolute inset-0 rounded-full"
+                  transition={{ type: "spring", bounce: 0.15, duration: 0.5 }}
+                />
+              )}
+              <span className="relative z-10 flex items-center gap-1.5">
+                <Icon className="w-3.5 h-3.5" />
+                {mod.label}
+              </span>
+            </button>
+          );
+        })}
       </div>
     </nav>
   );
