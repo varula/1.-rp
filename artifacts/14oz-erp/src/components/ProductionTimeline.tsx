@@ -42,9 +42,9 @@ export function ProductionTimeline() {
     <nav className="glass-nav sticky top-0 z-50 w-full no-print">
       <div className="flex items-center px-5 h-14 gap-2">
         {/* Brand */}
-        <div className="flex items-baseline mr-6 shrink-0">
-          <span className="font-bold text-[18px] tracking-tight text-foreground">14oz</span>
-          <span className="text-[11px] text-muted-foreground ml-1.5 font-semibold tracking-widest uppercase">ERP</span>
+        <div className="flex flex-col mr-6 shrink-0">
+          <span className="font-bold text-[17px] tracking-tight text-foreground leading-tight">SewMetrics</span>
+          <span className="text-[9px] text-muted-foreground font-medium tracking-wide leading-tight whitespace-nowrap hidden md:block">A Connected Ecosystem for Apparel Manufacturing</span>
         </div>
 
         {/* Nav pills */}

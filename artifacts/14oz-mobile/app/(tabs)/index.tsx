@@ -104,8 +104,8 @@ export default function DashboardScreen() {
       <View style={[styles.header, { paddingTop: topPad, backgroundColor: colors.card, borderBottomColor: colors.border }]}>
         <View style={styles.headerInner}>
           <View style={styles.brandRow}>
-            <Text style={[styles.brand14, { color: colors.primary }]}>14oz</Text>
-            <Text style={[styles.brandErp, { color: colors.mutedForeground }]}>ERP</Text>
+            <Text style={[styles.brandName, { color: colors.primary }]}>SewMetrics</Text>
+            <Text style={[styles.brandTagline, { color: colors.mutedForeground }]}>A Connected Ecosystem{"\n"}for Apparel Manufacturing</Text>
           </View>
           <View style={styles.headerMeta}>
             <Text style={[styles.dateText, { color: colors.mutedForeground }]}>{today}</Text>
@@ -184,9 +184,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 10,
   },
-  brandRow: { flexDirection: "row", alignItems: "baseline", gap: 6 },
-  brand14: { fontSize: 22, fontFamily: "InterTight_800ExtraBold", letterSpacing: -0.5 },
-  brandErp: { fontSize: 10, fontFamily: "InterTight_400Regular", letterSpacing: 4, textTransform: "uppercase" },
+  brandRow: { flexDirection: "column", gap: 1 },
+  brandName: { fontSize: 20, fontFamily: "InterTight_700Bold", letterSpacing: -0.3 },
+  brandTagline: { fontSize: 8, fontFamily: "InterTight_400Regular", letterSpacing: 0.2, lineHeight: 11 },
   headerMeta: { alignItems: "flex-end" },
   dateText: { fontSize: 9, fontFamily: "InterTight_400Regular", letterSpacing: 1, textTransform: "uppercase" },
   clockText: { fontSize: 13, fontFamily: "JetBrainsMono_400Regular", letterSpacing: 1, marginTop: 1 },
